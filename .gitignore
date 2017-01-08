@@ -1,0 +1,11 @@
+.DS_Store
+
+node_modules
+
+# elm-package generated files
+elm-stuff
+
+# elm-repl generated stuff
+repl-temp-*
+
+*.swp

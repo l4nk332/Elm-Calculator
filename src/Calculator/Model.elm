@@ -4,21 +4,19 @@ type Operator = Add
                 | Subtract
                 | Multiply
                 | Divide
-
-type Mode = OperatorMode
-            | OperandMode
+                | None
 
 type alias CalculatorModel =
-    { runningTotal : Float
-    , mode : Mode
-    , operandList : List Float
-    , operatorList : List Operator
+    { runningTotal : Int
+    , operandA : String
+    , operandB : String
+    , operator : Operator
     }
 
 initialCalculatorModel : CalculatorModel
 initialCalculatorModel =
     { runningTotal = 0
-    , mode = OperandMode
-    , operandList = []
-    , operatorList = []
+    , operandA = ""
+    , operandB = ""
+    , operator = None
     }

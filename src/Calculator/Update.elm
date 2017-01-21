@@ -19,10 +19,30 @@ setOperand value calcModel =
         _ ->
             { calcModel | operandB = calcModel.operandB ++ value }
 
+firstTwoRegistersSet : CalculatorModel -> Bool
+firstTwoRegistersSet calcModel =
+    if calcModel.operandA /= "" && calcModel.operandB == "" then
+        True
+    else
+        False
+
+allRegistersSet : CalculatorModel -> Bool
+allRegistersSet calcModel =
+    if calcModel.operandA /= "" && calcModel.operandB /= "" && calcModel.operator /= None then
+        True
+    else
+        False
+
+carryRunningTotal : Operator -> CalculatorModel -> CalculatorModel
+carryRunningTotal operator calcModel =
+    { calcModel | operandA = toString calcModel.runningTotal, operator = operator }
+
 setOperator : Operator -> CalculatorModel -> CalculatorModel
 setOperator operator calcModel =
-    if calcModel.operandA /= "" then
+    if firstTwoRegistersSet calcModel then
         { calcModel | operator = operator }
+    else if allRegistersSet calcModel then
+        carryRunningTotal operator (evaluateExpression calcModel)
     else
         calcModel
 
@@ -41,28 +61,28 @@ evaluateExpression calcModel =
         case operator of
             Add ->
                 { calcModel | runningTotal = operandA + operandB
-                , operandA = ""
+                , operandA = toString (operandA + operandB)
                 , operandB = ""
                 , operator = None
                 }
 
             Subtract ->
                 { calcModel | runningTotal = operandA - operandB
-                , operandA = ""
+                , operandA = toString (operandA - operandB)
                 , operandB = ""
                 , operator = None
                 }
 
             Multiply ->
                 { calcModel | runningTotal = operandA * operandB
-                , operandA = ""
+                , operandA = toString (operandA * operandB)
                 , operandB = ""
                 , operator = None
                 }
 
             Divide ->
                 { calcModel | runningTotal = operandA // operandB
-                , operandA = ""
+                , operandA = toString (operandA // operandB)
                 , operandB = ""
                 , operator = None
                 }

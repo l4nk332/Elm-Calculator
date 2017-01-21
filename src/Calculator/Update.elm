@@ -21,7 +21,10 @@ setOperand value calcModel =
 
 setOperator : Operator -> CalculatorModel -> CalculatorModel
 setOperator operator calcModel =
-    { calcModel | operator = operator }
+    if calcModel.operandA /= "" then
+        { calcModel | operator = operator }
+    else
+        calcModel
 
 evaluateExpression : CalculatorModel -> CalculatorModel
 evaluateExpression calcModel =

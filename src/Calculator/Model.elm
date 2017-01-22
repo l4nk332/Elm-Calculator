@@ -1,10 +1,13 @@
 module Calculator.Model exposing (CalculatorModel, initialCalculatorModel, Operator(..))
 
-type Operator = Add
-                | Subtract
-                | Multiply
-                | Divide
-                | None
+
+type Operator
+    = Add
+    | Subtract
+    | Multiply
+    | Divide
+    | None
+
 
 type alias CalculatorModel =
     { runningTotal : Float
@@ -12,6 +15,7 @@ type alias CalculatorModel =
     , operandB : String
     , operator : Operator
     }
+
 
 initialCalculatorModel : CalculatorModel
 initialCalculatorModel =

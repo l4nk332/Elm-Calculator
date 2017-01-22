@@ -4,6 +4,7 @@ import Calculator.Model exposing (CalculatorModel)
 import Calculator.Messages exposing (CalculatorMsg(..))
 import Calculator.Utils exposing (evaluateExpression, clearCalcModel, setOperator, setOperand)
 
+
 calculatorUpdate : CalculatorMsg -> CalculatorModel -> CalculatorModel
 calculatorUpdate calcMsg calcModel =
     case calcMsg of
@@ -18,4 +19,3 @@ calculatorUpdate calcMsg calcModel =
 
         Operand value ->
             setOperand value calcModel
-

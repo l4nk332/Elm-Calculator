@@ -43,6 +43,7 @@ calculatorView calcModel =
             , div [] [
                 button [ onClick Evaluate ] [ text "=" ]
                 , button [ onClick Clear ] [ text "C" ]
+                , button [ onClick (Operand ".") ] [ text "." ]
             ]
         ]
 

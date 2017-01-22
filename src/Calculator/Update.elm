@@ -15,9 +15,15 @@ setOperand : String -> CalculatorModel -> CalculatorModel
 setOperand value calcModel =
     case calcModel.operator of
         None ->
-            { calcModel | operandA = calcModel.operandA ++ value }
+            if value == "." && (String.contains value calcModel.operandA) then
+                calcModel
+            else
+                { calcModel | operandA = calcModel.operandA ++ value }
         _ ->
-            { calcModel | operandB = calcModel.operandB ++ value }
+            if value == "." && (String.contains value calcModel.operandB) then
+                calcModel
+            else
+                { calcModel | operandB = calcModel.operandB ++ value }
 
 firstTwoRegistersSet : CalculatorModel -> Bool
 firstTwoRegistersSet calcModel =

@@ -50,10 +50,10 @@ evaluateExpression : CalculatorModel -> CalculatorModel
 evaluateExpression calcModel =
     let
         operandA =
-            Result.withDefault 0 (String.toInt calcModel.operandA)
+                Result.withDefault 0 (String.toFloat calcModel.operandA)
 
         operandB =
-            Result.withDefault 0 (String.toInt calcModel.operandB)
+                Result.withDefault 0 (String.toFloat calcModel.operandB)
 
         operator =
             calcModel.operator
@@ -81,8 +81,8 @@ evaluateExpression calcModel =
                 }
 
             Divide ->
-                { calcModel | runningTotal = operandA // operandB
-                , operandA = toString (operandA // operandB)
+                { calcModel | runningTotal = operandA / operandB
+                , operandA = toString (operandA / operandB)
                 , operandB = ""
                 , operator = None
                 }

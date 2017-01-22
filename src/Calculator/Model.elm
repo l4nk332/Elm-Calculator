@@ -7,7 +7,7 @@ type Operator = Add
                 | None
 
 type alias CalculatorModel =
-    { runningTotal : Int
+    { runningTotal : Float
     , operandA : String
     , operandB : String
     , operator : Operator

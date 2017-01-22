@@ -1,4 +1,4 @@
-module Calculator.Model exposing (..)
+module Calculator.Model exposing (CalculatorModel, initialCalculatorModel, Operator(..))
 
 type Operator = Add
                 | Subtract

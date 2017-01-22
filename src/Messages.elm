@@ -1,5 +1,5 @@
-module Messages exposing (..)
+module Messages exposing (Msg(..))
 
-import Calculator.Messages exposing (CalculatorMsg(..))
+import Calculator.Messages exposing (CalculatorMsg)
 
 type Msg = CalculatorRoute CalculatorMsg

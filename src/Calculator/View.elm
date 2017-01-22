@@ -1,18 +1,11 @@
-module Calculator.View exposing (..)
+module Calculator.View exposing (calculatorView)
 
 import Html exposing (Html, div, button, h1, p, text)
 import Html.Events exposing (onClick)
 import Calculator.Model exposing (CalculatorModel, Operator(..))
 import Calculator.Messages exposing (CalculatorMsg(..))
+import Calculator.Utils exposing (getOperatorSymbol)
 
-getOperatorSymbol : Operator -> String
-getOperatorSymbol operator =
-    case operator of
-        Add -> "+"
-        Subtract -> "-"
-        Multiply -> "x"
-        Divide -> "÷"
-        None -> ""
 
 calculatorView : CalculatorModel -> Html CalculatorMsg
 calculatorView calcModel =

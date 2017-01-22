@@ -1,4 +1,4 @@
-module Calculator.Messages exposing (..)
+module Calculator.Messages exposing (CalculatorMsg(..))
 
 import Calculator.Model exposing (Operator)
 

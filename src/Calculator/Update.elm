@@ -17,11 +17,21 @@ setOperand value calcModel =
         None ->
             if value == "." && (String.contains value calcModel.operandA) then
                 calcModel
+            else if value == "-" then
+                if String.startsWith value calcModel.operandA then
+                    { calcModel | operandA = String.dropLeft 1 calcModel.operandA }
+                else
+                    { calcModel | operandA = value ++ calcModel.operandA }
             else
                 { calcModel | operandA = calcModel.operandA ++ value }
         _ ->
             if value == "." && (String.contains value calcModel.operandB) then
                 calcModel
+            else if value == "-" then
+                if String.startsWith value calcModel.operandB then
+                    { calcModel | operandB = String.dropLeft 1 calcModel.operandB }
+                else
+                    { calcModel | operandB = value ++ calcModel.operandB }
             else
                 { calcModel | operandB = calcModel.operandB ++ value }
 

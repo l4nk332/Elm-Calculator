@@ -4,7 +4,7 @@ import Html exposing (Html, div, button, h1, p, text)
 import Html.Events exposing (onClick)
 import Calculator.Model exposing (CalculatorModel, Operator(..))
 import Calculator.Messages exposing (CalculatorMsg(..))
-import Calculator.Utils exposing (getOperatorSymbol)
+import Calculator.Utils exposing (getSymbolFromOperator)
 
 
 calculatorView : CalculatorModel -> Html CalculatorMsg
@@ -12,7 +12,7 @@ calculatorView calcModel =
     div []
         [ h1 [] [ text (toString (calcModel.runningTotal)) ]
         , p [] [ text ("Operand A: " ++ calcModel.operandA) ]
-        , p [] [ text ("Operator: " ++ getOperatorSymbol calcModel.operator) ]
+        , p [] [ text ("Operator: " ++ getSymbolFromOperator calcModel.operator) ]
         , p [] [ text ("Operand B: " ++ calcModel.operandB) ]
         , div []
             [ button [ onClick (Operand "0") ] [ text "0" ]

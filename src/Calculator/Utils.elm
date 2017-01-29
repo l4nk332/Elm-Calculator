@@ -1,6 +1,7 @@
-module Calculator.Utils exposing (evaluateExpression, clearCalcModel, setOperator, setOperand, getOperatorSymbol)
+module Calculator.Utils exposing (evaluateExpression, clearCalcModel, setOperator, setOperand, getSymbolFromOperator, handleKeyEvent)
 
 import Calculator.Model exposing (CalculatorModel, Operator(..))
+import Keyboard
 
 
 clearCalcModel : CalculatorModel -> CalculatorModel
@@ -119,8 +120,8 @@ evaluateExpression calcModel =
                 calcModel
 
 
-getOperatorSymbol : Operator -> String
-getOperatorSymbol operator =
+getSymbolFromOperator : Operator -> String
+getSymbolFromOperator operator =
     case operator of
         Add ->
             "+"
@@ -136,3 +137,82 @@ getOperatorSymbol operator =
 
         None ->
             ""
+
+
+handleKeyEvent : Keyboard.KeyCode -> CalculatorModel -> CalculatorModel
+handleKeyEvent keyCode calcModel =
+    case keyCode of
+        8 ->
+            clearCalcModel calcModel
+
+        13 ->
+            evaluateExpression calcModel
+
+        187 ->
+            evaluateExpression calcModel
+
+        48 ->
+            setOperand "0" calcModel
+
+        49 ->
+            setOperand "1" calcModel
+
+        50 ->
+            setOperand "2" calcModel
+
+        51 ->
+            setOperand "3" calcModel
+
+        52 ->
+            setOperand "4" calcModel
+
+        53 ->
+            setOperand "5" calcModel
+
+        54 ->
+            setOperand "6" calcModel
+
+        55 ->
+            setOperand "7" calcModel
+
+        56 ->
+            setOperand "8" calcModel
+
+        57 ->
+            setOperand "9" calcModel
+
+        110 ->
+            setOperand "." calcModel
+
+        190 ->
+            setOperand "." calcModel
+
+        83 ->
+            setOperand "-" calcModel
+
+        106 ->
+            setOperator Multiply calcModel
+
+        88 ->
+            setOperator Multiply calcModel
+
+        107 ->
+            setOperator Add calcModel
+
+        80 ->
+            setOperator Add calcModel
+
+        109 ->
+            setOperator Subtract calcModel
+
+        189 ->
+            setOperator Subtract calcModel
+
+        111 ->
+            setOperator Divide calcModel
+
+        191 ->
+            setOperator Divide calcModel
+
+        _ ->
+            calcModel

@@ -5,16 +5,7 @@ import Model exposing (Model, initialModel)
 import Update exposing (update)
 import Messages exposing (Msg)
 import View exposing (view)
-
-
--- Subscriptions
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
-
-
+import Subscriptions exposing (subscriptions)
 
 -- Main
 

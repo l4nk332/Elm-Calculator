@@ -15,6 +15,7 @@ type alias CalculatorModel =
     , operandA : String
     , operandB : String
     , operator : Operator
+    , opError : String
     }
 
 
@@ -24,4 +25,5 @@ initialCalculatorModel =
     , operandA = ""
     , operandB = ""
     , operator = None
+    , opError = ""
     }

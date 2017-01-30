@@ -1,6 +1,6 @@
 module Calculator.View exposing (calculatorView)
 
-import Html exposing (Html, div, h5, small, table, tbody, tr, td, text)
+import Html exposing (Html, div, h5, small, table, tbody, tr, td, p, text)
 import Html.Attributes exposing (class, colspan)
 import Html.Events exposing (onClick)
 import Calculator.Model exposing (CalculatorModel, Operator(..))
@@ -15,12 +15,15 @@ displayOperandOrZero operand =
     else
         operand
 
+calculatorErrorMessage : CalculatorModel -> Html CalculatorMsg
+calculatorErrorMessage calcModel =
+    p [ class "error_message" ] [ text calcModel.opError ]
 
 calculatorDisplay : CalculatorModel -> Html CalculatorMsg
 calculatorDisplay calcModel =
     div [ class "display" ]
         [ h5 [ class "display__value" ] [ text (displayOperandOrZero (calcModel.operandA)) ]
-        , small [ class "display__operations" ] [ text ((getSymbolFromOperator calcModel.operator) ++ calcModel.operandB) ]
+        , small [ class "display__operations" ] [ text ((getSymbolFromOperator calcModel.operator) ++ " " ++ calcModel.operandB) ]
         ]
 
 
@@ -64,7 +67,7 @@ calculatorNumPad calcModel =
 
 calculatorView : CalculatorModel -> Html CalculatorMsg
 calculatorView calcModel =
-    div [ class "calculator" ]
-        [ calculatorDisplay calcModel
-        , calculatorNumPad calcModel
+    div []
+        [ calculatorErrorMessage calcModel
+        , div [ class "calculator" ] [ calculatorDisplay calcModel, calculatorNumPad calcModel ]
         ]

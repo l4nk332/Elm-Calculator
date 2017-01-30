@@ -1,4 +1,4 @@
-module Calculator.Utils exposing (evaluateExpression, clearCalcModel, setOperator, setOperand, getSymbolFromOperator, handleKeyEvent)
+module Calculator.Utils exposing (evaluateExpression, clearCalcModel, setOperator, setOperand, getSymbolFromOperator, handleKeyEvent, showErrorMessage)
 
 import Calculator.Model exposing (CalculatorModel, Operator(..))
 import Keyboard
@@ -11,6 +11,7 @@ clearCalcModel calcModel =
         , operandA = ""
         , operandB = ""
         , operator = None
+        , opError = ""
     }
 
 
@@ -22,22 +23,22 @@ setOperand value calcModel =
                 calcModel
             else if value == "-" then
                 if String.startsWith value calcModel.operandA then
-                    { calcModel | operandA = String.dropLeft 1 calcModel.operandA }
+                    { calcModel | operandA = String.dropLeft 1 calcModel.operandA, opError = "" }
                 else
-                    { calcModel | operandA = value ++ calcModel.operandA }
+                    { calcModel | operandA = value ++ calcModel.operandA, opError = "" }
             else
-                { calcModel | operandA = calcModel.operandA ++ value }
+                { calcModel | operandA = calcModel.operandA ++ value, opError = "" }
 
         _ ->
             if value == "." && (String.contains value calcModel.operandB) then
                 calcModel
             else if value == "-" then
                 if String.startsWith value calcModel.operandB then
-                    { calcModel | operandB = String.dropLeft 1 calcModel.operandB }
+                    { calcModel | operandB = String.dropLeft 1 calcModel.operandB, opError = "" }
                 else
-                    { calcModel | operandB = value ++ calcModel.operandB }
+                    { calcModel | operandB = value ++ calcModel.operandB, opError = "" }
             else
-                { calcModel | operandB = calcModel.operandB ++ value }
+                { calcModel | operandB = calcModel.operandB ++ value, opError = "" }
 
 
 firstTwoRegistersSet : CalculatorModel -> Bool
@@ -58,15 +59,15 @@ allRegistersSet calcModel =
 
 carryRunningTotal : Operator -> CalculatorModel -> CalculatorModel
 carryRunningTotal operator calcModel =
-    { calcModel | operandA = toString calcModel.runningTotal, operator = operator }
+    { calcModel | operandA = toString calcModel.runningTotal, operator = operator, opError = "" }
 
 
 setOperator : Operator -> CalculatorModel -> CalculatorModel
 setOperator operator calcModel =
     if calcModel.operandA == "" then
-        { calcModel | operandA = "0", operator = operator }
+        { calcModel | operandA = "0", operator = operator, opError = "" }
     else if firstTwoRegistersSet calcModel then
-        { calcModel | operator = operator }
+        { calcModel | operator = operator, opError = "" }
     else if allRegistersSet calcModel then
         carryRunningTotal operator (evaluateExpression calcModel)
     else
@@ -93,6 +94,7 @@ evaluateExpression calcModel =
                         , operandA = toString (operandA + operandB)
                         , operandB = ""
                         , operator = None
+                        , opError = ""
                     }
 
                 Subtract ->
@@ -101,6 +103,7 @@ evaluateExpression calcModel =
                         , operandA = toString (operandA - operandB)
                         , operandB = ""
                         , operator = None
+                        , opError = ""
                     }
 
                 Multiply ->
@@ -109,6 +112,7 @@ evaluateExpression calcModel =
                         , operandA = toString (operandA * operandB)
                         , operandB = ""
                         , operator = None
+                        , opError = ""
                     }
 
                 Divide ->
@@ -118,9 +122,10 @@ evaluateExpression calcModel =
                             , operandA = toString (operandA / operandB)
                             , operandB = ""
                             , operator = None
+                            , opError = ""
                         }
                     else
-                        clearCalcModel calcModel
+                        showErrorMessage "Cannot divide by zero" calcModel
 
                 Modulo ->
                     if (canModulo calcModel) then
@@ -129,9 +134,10 @@ evaluateExpression calcModel =
                             , operandA = toString (toFloat ((floor operandA) % (floor operandB)))
                             , operandB = ""
                             , operator = None
+                            , opError = ""
                         }
                     else
-                        clearCalcModel calcModel
+                        showErrorMessage "Cannot find remainder of division by zero" calcModel
 
                 None ->
                     calcModel
@@ -252,3 +258,7 @@ handleKeyEvent keyCode calcModel =
 
         _ ->
             calcModel
+
+showErrorMessage : String -> CalculatorModel -> CalculatorModel
+showErrorMessage error calcModel =
+    { calcModel | opError = error, runningTotal = 0, operandA = "", operandB = "", operator = None}

@@ -32,7 +32,7 @@ calculatorNumPad calcModel =
                 tr [ class "numpad__row" ] [
                     td [ onClick Clear, class "numpad__cell size_one" ] [ text "AC" ]
                     , td [ onClick (Operand "-"), class "numpad__cell size_one" ] [ text "+/-" ]
-                    , td [ class "numpad__cell size_one" ] [ text "%" ]
+                    , td [ onClick (Operation Modulo), class "numpad__cell size_one" ] [ text "%" ]
                     , td [ onClick (Operation Divide), class "numpad__cell size_one operator" ] [ text "÷" ]
                 ],
                 tr [ class "numpad__row" ] [

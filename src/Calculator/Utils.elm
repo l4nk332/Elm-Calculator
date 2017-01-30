@@ -112,17 +112,45 @@ evaluateExpression calcModel =
                     }
 
                 Divide ->
-                    { calcModel
-                        | runningTotal = operandA / operandB
-                        , operandA = toString (operandA / operandB)
-                        , operandB = ""
-                        , operator = None
-                    }
+                    if (canDivide calcModel) then
+                        { calcModel
+                            | runningTotal = operandA / operandB
+                            , operandA = toString (operandA / operandB)
+                            , operandB = ""
+                            , operator = None
+                        }
+                    else
+                        clearCalcModel calcModel
+
+                Modulo ->
+                    if (canModulo calcModel) then
+                        { calcModel
+                            | runningTotal = toFloat ((floor operandA) % (floor operandB))
+                            , operandA = toString (toFloat ((floor operandA) % (floor operandB)))
+                            , operandB = ""
+                            , operator = None
+                        }
+                    else
+                        clearCalcModel calcModel
 
                 None ->
                     calcModel
     else
         calcModel
+
+canModulo : CalculatorModel -> Bool
+canModulo calcModel =
+    if (floor(Result.withDefault 0 (String.toFloat calcModel.operandB))) == 0 then
+        False
+    else
+        True
+
+canDivide : CalculatorModel -> Bool
+canDivide calcModel =
+    if (Result.withDefault 0 (String.toFloat calcModel.operandB)) == 0 then
+        False
+    else
+        True
 
 
 getSymbolFromOperator : Operator -> String
@@ -139,6 +167,9 @@ getSymbolFromOperator operator =
 
         Divide ->
             "÷"
+
+        Modulo ->
+            "%"
 
         None ->
             ""

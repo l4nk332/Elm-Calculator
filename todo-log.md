@@ -6,4 +6,5 @@
 * [X] - ~~Add support for using the decimal to input floating point numbers.~~
 * [X] - ~~Add keypress functionality so that a user doesn't have to use a mouse.~~
 * [X] - ~~Add styling and layout to the widget to make it more aesthetically appealing.~~
-* [ ] - Add modulus functionality to the Calculator
+* [X] - Add modulus functionality to the Calculator
+* [ ] - Display errors to user when an invalid expression is evaluate (i.e dividing by 0/modulus by 0)

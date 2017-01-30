@@ -6,6 +6,7 @@ type Operator
     | Subtract
     | Multiply
     | Divide
+    | Modulo
     | None
 
 

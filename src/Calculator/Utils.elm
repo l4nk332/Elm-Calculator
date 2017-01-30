@@ -42,7 +42,7 @@ setOperand value calcModel =
 
 firstTwoRegistersSet : CalculatorModel -> Bool
 firstTwoRegistersSet calcModel =
-    if calcModel.operandA /= "" && calcModel.operandB == "" then
+    if calcModel.operandA /= "" && calcModel.operandB == "" && calcModel.operandA /= "-" && calcModel.operandA /= "." && calcModel.operandA /= "-." then
         True
     else
         False
@@ -63,7 +63,9 @@ carryRunningTotal operator calcModel =
 
 setOperator : Operator -> CalculatorModel -> CalculatorModel
 setOperator operator calcModel =
-    if firstTwoRegistersSet calcModel then
+    if calcModel.operandA == "" then
+        { calcModel | operandA = "0", operator = operator }
+    else if firstTwoRegistersSet calcModel then
         { calcModel | operator = operator }
     else if allRegistersSet calcModel then
         carryRunningTotal operator (evaluateExpression calcModel)
@@ -73,51 +75,54 @@ setOperator operator calcModel =
 
 evaluateExpression : CalculatorModel -> CalculatorModel
 evaluateExpression calcModel =
-    let
-        operandA =
-            Result.withDefault 0 (String.toFloat calcModel.operandA)
+    if calcModel.operandB /= "-" && calcModel.operandB /= "." && calcModel.operandB /= "-." then
+        let
+            operandA =
+                Result.withDefault 0 (String.toFloat calcModel.operandA)
 
-        operandB =
-            Result.withDefault 0 (String.toFloat calcModel.operandB)
+            operandB =
+                Result.withDefault 0 (String.toFloat calcModel.operandB)
 
-        operator =
-            calcModel.operator
-    in
-        case operator of
-            Add ->
-                { calcModel
-                    | runningTotal = operandA + operandB
-                    , operandA = toString (operandA + operandB)
-                    , operandB = ""
-                    , operator = None
-                }
+            operator =
+                calcModel.operator
+        in
+            case operator of
+                Add ->
+                    { calcModel
+                        | runningTotal = operandA + operandB
+                        , operandA = toString (operandA + operandB)
+                        , operandB = ""
+                        , operator = None
+                    }
 
-            Subtract ->
-                { calcModel
-                    | runningTotal = operandA - operandB
-                    , operandA = toString (operandA - operandB)
-                    , operandB = ""
-                    , operator = None
-                }
+                Subtract ->
+                    { calcModel
+                        | runningTotal = operandA - operandB
+                        , operandA = toString (operandA - operandB)
+                        , operandB = ""
+                        , operator = None
+                    }
 
-            Multiply ->
-                { calcModel
-                    | runningTotal = operandA * operandB
-                    , operandA = toString (operandA * operandB)
-                    , operandB = ""
-                    , operator = None
-                }
+                Multiply ->
+                    { calcModel
+                        | runningTotal = operandA * operandB
+                        , operandA = toString (operandA * operandB)
+                        , operandB = ""
+                        , operator = None
+                    }
 
-            Divide ->
-                { calcModel
-                    | runningTotal = operandA / operandB
-                    , operandA = toString (operandA / operandB)
-                    , operandB = ""
-                    , operator = None
-                }
+                Divide ->
+                    { calcModel
+                        | runningTotal = operandA / operandB
+                        , operandA = toString (operandA / operandB)
+                        , operandB = ""
+                        , operator = None
+                    }
 
-            None ->
-                calcModel
+                None ->
+                    calcModel
+    else
+        calcModel
 
 
 getSymbolFromOperator : Operator -> String

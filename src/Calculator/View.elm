@@ -1,41 +1,70 @@
 module Calculator.View exposing (calculatorView)
 
-import Html exposing (Html, div, button, h1, p, text)
+import Html exposing (Html, div, h5, small, table, tbody, tr, td, text)
+import Html.Attributes exposing (class, colspan)
 import Html.Events exposing (onClick)
 import Calculator.Model exposing (CalculatorModel, Operator(..))
 import Calculator.Messages exposing (CalculatorMsg(..))
 import Calculator.Utils exposing (getSymbolFromOperator)
 
 
+displayOperandOrZero : String -> String
+displayOperandOrZero operand =
+    if operand == "" then
+        "0"
+    else
+        operand
+
+
+calculatorDisplay : CalculatorModel -> Html CalculatorMsg
+calculatorDisplay calcModel =
+    div [ class "display" ]
+        [ h5 [ class "display__value" ] [ text (displayOperandOrZero (calcModel.operandA)) ]
+        , small [ class "display__operations" ] [ text ((getSymbolFromOperator calcModel.operator) ++ calcModel.operandB) ]
+        ]
+
+
+calculatorNumPad : CalculatorModel -> Html CalculatorMsg
+calculatorNumPad calcModel =
+    table [ class "numpad" ]
+        [ tbody []
+            [
+                tr [ class "numpad__row" ] [
+                    td [ onClick Clear, class "numpad__cell size_one" ] [ text "AC" ]
+                    , td [ onClick (Operand "-"), class "numpad__cell size_one" ] [ text "+/-" ]
+                    , td [ class "numpad__cell size_one" ] [ text "%" ]
+                    , td [ onClick (Operation Divide), class "numpad__cell size_one operator" ] [ text "÷" ]
+                ],
+                tr [ class "numpad__row" ] [
+                    td [ onClick (Operand "7"), class "numpad__cell size_one operand" ] [ text "7" ]
+                    , td [ onClick (Operand "8"), class "numpad__cell size_one operand" ] [ text "8" ]
+                    , td [ onClick (Operand "9"), class "numpad__cell size_one operand" ] [ text "9" ]
+                    , td [ onClick (Operation Multiply), class "numpad__cell size_one operator" ] [ text "x" ]
+                ],
+                tr [ class "numpad__row" ] [
+                    td [ onClick (Operand "4"), class "numpad__cell size_one operand" ] [ text "4" ]
+                    , td [ onClick (Operand "5"), class "numpad__cell size_one operand" ] [ text "5" ]
+                    , td [ onClick (Operand "6"), class "numpad__cell size_one operand" ] [ text "6" ]
+                    , td [ onClick (Operation Subtract), class "numpad__cell size_one operator" ] [ text "-" ]
+                ],
+                tr [ class "numpad__row" ] [
+                    td [ onClick (Operand "1"), class "numpad__cell size_one operand" ] [ text "1" ]
+                    , td [ onClick (Operand "2"), class "numpad__cell size_one operand" ] [ text "2" ]
+                    , td [ onClick (Operand "3"), class "numpad__cell size_one operand" ] [ text "3" ]
+                    , td [ onClick (Operation Add), class "numpad__cell size_one operator" ] [ text "+" ]
+                ],
+                tr [ class "numpad__row" ] [
+                    td [ onClick (Operand "0"), colspan 2, class "numpad__cell size_two align-left operand" ] [ text "0" ]
+                    , td [ onClick (Operand "."), class "numpad__cell size_one operand" ] [ text "." ]
+                    , td [ onClick Evaluate, class "numpad__cell size_one operator" ] [ text "=" ]
+                ]
+            ]
+        ]
+
+
 calculatorView : CalculatorModel -> Html CalculatorMsg
 calculatorView calcModel =
-    div []
-        [ h1 [] [ text (toString (calcModel.runningTotal)) ]
-        , p [] [ text ("Operand A: " ++ calcModel.operandA) ]
-        , p [] [ text ("Operator: " ++ getSymbolFromOperator calcModel.operator) ]
-        , p [] [ text ("Operand B: " ++ calcModel.operandB) ]
-        , div []
-            [ button [ onClick (Operand "0") ] [ text "0" ]
-            , button [ onClick (Operand "1") ] [ text "1" ]
-            , button [ onClick (Operand "2") ] [ text "2" ]
-            , button [ onClick (Operand "3") ] [ text "3" ]
-            , button [ onClick (Operand "4") ] [ text "4" ]
-            , button [ onClick (Operand "5") ] [ text "5" ]
-            , button [ onClick (Operand "6") ] [ text "6" ]
-            , button [ onClick (Operand "7") ] [ text "7" ]
-            , button [ onClick (Operand "8") ] [ text "8" ]
-            , button [ onClick (Operand "9") ] [ text "9" ]
-            ]
-        , div []
-            [ button [ onClick (Operation Add) ] [ text "+" ]
-            , button [ onClick (Operation Subtract) ] [ text "-" ]
-            , button [ onClick (Operation Multiply) ] [ text "x" ]
-            , button [ onClick (Operation Divide) ] [ text "÷" ]
-            ]
-        , div []
-            [ button [ onClick Evaluate ] [ text "=" ]
-            , button [ onClick Clear ] [ text "C" ]
-            , button [ onClick (Operand ".") ] [ text "." ]
-            , button [ onClick (Operand "-") ] [ text "+/-" ]
-            ]
+    div [ class "calculator" ]
+        [ calculatorDisplay calcModel
+        , calculatorNumPad calcModel
         ]

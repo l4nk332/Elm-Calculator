@@ -144,12 +144,14 @@ evaluateExpression calcModel =
     else
         calcModel
 
+
 canModulo : CalculatorModel -> Bool
 canModulo calcModel =
-    if (floor(Result.withDefault 0 (String.toFloat calcModel.operandB))) == 0 then
+    if (floor (Result.withDefault 0 (String.toFloat calcModel.operandB))) == 0 then
         False
     else
         True
+
 
 canDivide : CalculatorModel -> Bool
 canDivide calcModel =
@@ -259,6 +261,7 @@ handleKeyEvent keyCode calcModel =
         _ ->
             calcModel
 
+
 showErrorMessage : String -> CalculatorModel -> CalculatorModel
 showErrorMessage error calcModel =
-    { calcModel | opError = error, runningTotal = 0, operandA = "", operandB = "", operator = None}
+    { calcModel | opError = error, runningTotal = 0, operandA = "", operandB = "", operator = None }

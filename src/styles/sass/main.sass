@@ -11,9 +11,38 @@ $roboto: 'Roboto', sans-serif
     box-sizing: border-box
 
 body
-    @include flex(column, nowrap, center, center)
+    @include flex(column, nowrap, center, flex-start)
     min-height: 100vh
     background-color: #F0F7EE
+    padding: 4em
+
+$header--color: #75B09C
+
+.header
+    color: $header--color
+    transition: color 150ms ease-in-out
+    &:hover
+        color: lighten($header--color, 10%)
+        .separator
+            width: 15em
+
+.title
+    color: inherit
+    text-decoration: none
+    font-size: 2.2em
+    font-family: Helvetica Neue
+    font-weight: 200
+    cursor: pointer
+    letter-spacing: 0.03em
+    text-align: center
+    display: block
+
+.separator
+    color: inherit
+    width: 3em
+    margin: 1em auto 3.5em auto
+    transition: width 150ms ease-in-out
+
 
 .calculator
     font-family: $roboto
@@ -65,27 +94,37 @@ body
     height: 20%
     width: 100%
 
+$numpad--color: rgb(213, 213, 213)
+$operand--color: rgb(224, 224, 224)
+$operator--color: rgb(223, 145, 60)
+
 .numpad__cell
-    cursor: default
-    background-color: rgb(213, 213, 213)
+    cursor: pointer
+    background-color: $numpad--color
     color: black
-    border: 1px solid rgb(131, 131, 131)
     text-align: center
     vertical-align: center
     user-select: none
+    transition: background-color 150ms ease-in-out
+    &:hover
+        background-color: darken($numpad--color, 10%)
     &:active
-        background-color: rgb(168, 167, 168)
+        background-color: darken($numpad--color, 20%)
 
 .operand
-    background-color: rgb(224, 224, 224)
+    background-color: $operand--color
+    &:hover
+        background-color: darken($operand--color, 10%)
     &:active
-        background-color: rgb(177, 177, 177)
+        background-color: darken($operand--color, 20%)
 
 .operator
-    background-color: rgb(223, 145, 60)
+    background-color: $operator--color
     color: white
+    &:hover
+        background-color: darken($operator--color, 10%)
     &:active
-        background-color: rgb(177, 115, 47)
+        background-color: darken($operator--color, 20%)
 
 .align-left
     text-align: left

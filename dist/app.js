@@ -452,7 +452,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column nowrap;\n          flex-flow: column nowrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  min-height: 100vh;\n  background-color: #F0F7EE; }\n\n.calculator {\n  font-family: \"Roboto\", sans-serif;\n  font-size: 21px;\n  width: 235px;\n  height: 321px;\n  margin: auto;\n  border-radius: 5px;\n  overflow: hidden;\n  box-shadow: 0 15px 40px 0px rgba(20, 20, 20, 0.5); }\n\n.display {\n  height: 25%;\n  background-color: rgba(0, 0, 0, 0.33);\n  color: white; }\n\n.display__value {\n  margin: 0;\n  font-size: 40px;\n  width: 100%;\n  height: 75%;\n  font-weight: 100;\n  text-align: right;\n  padding: 10px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden; }\n\n.display__operations {\n  display: block;\n  width: 100%;\n  height: 25%;\n  text-align: left;\n  padding: 0 5px 0px 5px;\n  font-size: 16px;\n  font-weight: 100;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden; }\n\n.numpad {\n  width: 100%;\n  height: 75%;\n  border-collapse: collapse;\n  table-layout: fixed; }\n\n.numpad__row {\n  height: 20%;\n  width: 100%; }\n\n.numpad__cell {\n  cursor: default;\n  background-color: #d5d5d5;\n  color: black;\n  border: 1px solid #838383;\n  text-align: center;\n  vertical-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n  .numpad__cell:active {\n    background-color: #a8a7a8; }\n\n.operand {\n  background-color: #e0e0e0; }\n  .operand:active {\n    background-color: #b1b1b1; }\n\n.operator {\n  background-color: #df913c;\n  color: white; }\n  .operator:active {\n    background-color: #b1732f; }\n\n.align-left {\n  text-align: left;\n  padding-left: 23px; }\n\n.error_message {\n  text-align: center;\n  color: #ab392b; }\n", "", {"version":3,"sources":["/./src/styles/sass/src/styles/sass/main.sass"],"names":[],"mappings":"AASA;EACI,uBAAsB,EAAI;;AAE9B;EARI,qBAAa;EAAb,qBAAa;EAAb,cAAa;EACb,6BAQ4B;EAR5B,8BAQ4B;MAR5B,6BAQ4B;UAR5B,yBAQ4B;EAP5B,0BAOoC;MAPpC,uBAOoC;UAPpC,oBAOoC;EANpC,yBAM4C;MAN5C,sBAM4C;UAN5C,wBAM4C;EAC5C,kBAAiB;EACjB,0BAAyB,EAAI;;AAEjC;EACI,kCAlByB;EAmBzB,gBAAe;EACf,aAAY;EACZ,cAAa;EACb,aAAY;EACZ,mBAAkB;EAClB,iBAAgB;EAChB,kDAAgD,EAAG;;AAEvD;EACI,YAAW;EACX,sCAAqC;EACrC,aAAY,EAAI;;AAEpB;EACI,UAAS;EACT,gBAAe;EACf,YAAW;EACX,YAAW;EACX,iBAAgB;EAChB,kBAAiB;EACjB,cAAa;EACb,wBAAuB;EACvB,oBAAmB;EACnB,iBAAgB,EAAI;;AAGxB;EACI,eAAc;EACd,YAAW;EACX,YAAW;EACX,iBAAgB;EAChB,uBAAsB;EACtB,gBAAe;EACf,iBAAgB;EAChB,wBAAuB;EACvB,oBAAmB;EACnB,iBAAgB,EAAI;;AAExB;EACI,YAAW;EACX,YAAW;EACX,0BAAyB;EACzB,oBAAmB,EAAI;;AAE3B;EACI,YAAW;EACX,YAAW,EAAI;;AAEnB;EACI,gBAAe;EACf,0BAAoC;EACpC,aAAY;EACZ,0BAAoC;EACpC,mBAAkB;EAClB,uBAAsB;EACtB,0BAAiB;KAAjB,uBAAiB;MAAjB,sBAAiB;UAAjB,kBAAiB,EAE4B;EATjD;IASQ,0BAAoC,EAAG;;AAE/C;EACI,0BAAoC,EAES;EAHjD;IAGQ,0BAAoC,EAAG;;AAE/C;EACI,0BAAmC;EACnC,aAAY,EAEgC;EAJhD;IAIQ,0BAAmC,EAAG;;AAE9C;EACI,iBAAgB;EAChB,mBAAkB,EAAI;;AAE1B;EACI,mBAAkB;EAClB,eAAuB,EAAG","file":"main.sass","sourcesContent":["$roboto: 'Roboto', sans-serif;\n\n\n@mixin flex($row, $wrap, $align, $justify) {\n    display: flex;\n    flex-flow: $row $wrap;\n    align-items: $align;\n    justify-content: $justify; }\n\n* {\n    box-sizing: border-box; }\n\nbody {\n    @include flex(column, nowrap, center, center);\n    min-height: 100vh;\n    background-color: #F0F7EE; }\n\n.calculator {\n    font-family: $roboto;\n    font-size: 21px;\n    width: 235px;\n    height: 321px;\n    margin: auto;\n    border-radius: 5px;\n    overflow: hidden;\n    box-shadow: 0 15px 40px 0px rgba(20, 20,20, 0.5); }\n\n.display {\n    height: 25%;\n    background-color: rgba(0, 0, 0, 0.33);\n    color: white; }\n\n.display__value {\n    margin: 0;\n    font-size: 40px;\n    width: 100%;\n    height: 75%;\n    font-weight: 100;\n    text-align: right;\n    padding: 10px;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden; }\n\n\n.display__operations {\n    display: block;\n    width: 100%;\n    height: 25%;\n    text-align: left;\n    padding: 0 5px 0px 5px;\n    font-size: 16px;\n    font-weight: 100;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden; }\n\n.numpad {\n    width: 100%;\n    height: 75%;\n    border-collapse: collapse;\n    table-layout: fixed; }\n\n.numpad__row {\n    height: 20%;\n    width: 100%; }\n\n.numpad__cell {\n    cursor: default;\n    background-color: rgb(213, 213, 213);\n    color: black;\n    border: 1px solid rgb(131, 131, 131);\n    text-align: center;\n    vertical-align: center;\n    user-select: none;\n    &:active {\n        background-color: rgb(168, 167, 168); } }\n\n.operand {\n    background-color: rgb(224, 224, 224);\n    &:active {\n        background-color: rgb(177, 177, 177); } }\n\n.operator {\n    background-color: rgb(223, 145, 60);\n    color: white;\n    &:active {\n        background-color: rgb(177, 115, 47); } }\n\n.align-left {\n    text-align: left;\n    padding-left: 23px; }\n\n.error_message {\n    text-align: center;\n    color: rgb(171, 57, 43); }\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column nowrap;\n          flex-flow: column nowrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  min-height: 100vh;\n  background-color: #F0F7EE;\n  padding: 4em; }\n\n.header {\n  color: #75B09C;\n  -webkit-transition: color 150ms ease-in-out;\n  transition: color 150ms ease-in-out; }\n  .header:hover {\n    color: #95c3b3; }\n    .header:hover .separator {\n      width: 15em; }\n\n.title {\n  color: inherit;\n  text-decoration: none;\n  font-size: 2.2em;\n  font-family: Helvetica Neue;\n  font-weight: 200;\n  cursor: pointer;\n  letter-spacing: 0.03em;\n  text-align: center;\n  display: block; }\n\n.separator {\n  color: inherit;\n  width: 3em;\n  margin: 1em auto 3.5em auto;\n  -webkit-transition: width 150ms ease-in-out;\n  transition: width 150ms ease-in-out; }\n\n.calculator {\n  font-family: \"Roboto\", sans-serif;\n  font-size: 21px;\n  width: 235px;\n  height: 321px;\n  margin: auto;\n  border-radius: 5px;\n  overflow: hidden;\n  box-shadow: 0 15px 40px 0px rgba(20, 20, 20, 0.5); }\n\n.display {\n  height: 25%;\n  background-color: rgba(0, 0, 0, 0.33);\n  color: white; }\n\n.display__value {\n  margin: 0;\n  font-size: 40px;\n  width: 100%;\n  height: 75%;\n  font-weight: 100;\n  text-align: right;\n  padding: 10px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden; }\n\n.display__operations {\n  display: block;\n  width: 100%;\n  height: 25%;\n  text-align: left;\n  padding: 0 5px 0px 5px;\n  font-size: 16px;\n  font-weight: 100;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden; }\n\n.numpad {\n  width: 100%;\n  height: 75%;\n  border-collapse: collapse;\n  table-layout: fixed; }\n\n.numpad__row {\n  height: 20%;\n  width: 100%; }\n\n.numpad__cell {\n  cursor: pointer;\n  background-color: #d5d5d5;\n  color: black;\n  text-align: center;\n  vertical-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-transition: background-color 150ms ease-in-out;\n  transition: background-color 150ms ease-in-out; }\n  .numpad__cell:hover {\n    background-color: #bcbcbc; }\n  .numpad__cell:active {\n    background-color: #a2a2a2; }\n\n.operand {\n  background-color: #e0e0e0; }\n  .operand:hover {\n    background-color: #c7c7c7; }\n  .operand:active {\n    background-color: #adadad; }\n\n.operator {\n  background-color: #df913c;\n  color: white; }\n  .operator:hover {\n    background-color: #c77821; }\n  .operator:active {\n    background-color: #9b5d1a; }\n\n.align-left {\n  text-align: left;\n  padding-left: 23px; }\n\n.error_message {\n  text-align: center;\n  color: #ab392b; }\n", "", {"version":3,"sources":["/./src/styles/sass/src/styles/sass/main.sass"],"names":[],"mappings":"AASA;EACI,uBAAsB,EAAI;;AAE9B;EARI,qBAAa;EAAb,qBAAa;EAAb,cAAa;EACb,6BAQ4B;EAR5B,8BAQ4B;MAR5B,6BAQ4B;UAR5B,yBAQ4B;EAP5B,0BAOoC;MAPpC,uBAOoC;UAPpC,oBAOoC;EANpC,wBAMgD;MANhD,qBAMgD;UANhD,4BAMgD;EAChD,kBAAiB;EACjB,0BAAyB;EACzB,aAAY,EAAI;;AAIpB;EACI,eAHmB;EAInB,4CAAmC;EAAnC,oCAAmC,EAIR;EAN/B;IAIQ,eAAmC,EAEd;IAN7B;MAMY,YAAW,EAAI;;AAE3B;EACI,eAAc;EACd,sBAAqB;EACrB,iBAAgB;EAChB,4BAA2B;EAC3B,iBAAgB;EAChB,gBAAe;EACf,uBAAsB;EACtB,mBAAkB;EAClB,eAAc,EAAI;;AAEtB;EACI,eAAc;EACd,WAAU;EACV,4BAA2B;EAC3B,4CAAmC;EAAnC,oCAAmC,EAAI;;AAG3C;EACI,kCA/CyB;EAgDzB,gBAAe;EACf,aAAY;EACZ,cAAa;EACb,aAAY;EACZ,mBAAkB;EAClB,iBAAgB;EAChB,kDAAgD,EAAG;;AAEvD;EACI,YAAW;EACX,sCAAqC;EACrC,aAAY,EAAI;;AAEpB;EACI,UAAS;EACT,gBAAe;EACf,YAAW;EACX,YAAW;EACX,iBAAgB;EAChB,kBAAiB;EACjB,cAAa;EACb,wBAAuB;EACvB,oBAAmB;EACnB,iBAAgB,EAAI;;AAGxB;EACI,eAAc;EACd,YAAW;EACX,YAAW;EACX,iBAAgB;EAChB,uBAAsB;EACtB,gBAAe;EACf,iBAAgB;EAChB,wBAAuB;EACvB,oBAAmB;EACnB,iBAAgB,EAAI;;AAExB;EACI,YAAW;EACX,YAAW;EACX,0BAAyB;EACzB,oBAAmB,EAAI;;AAE3B;EACI,YAAW;EACX,YAAW,EAAI;;AAMnB;EACI,gBAAe;EACf,0BAN8B;EAO9B,aAAY;EACZ,mBAAkB;EAClB,uBAAsB;EACtB,0BAAiB;KAAjB,uBAAiB;MAAjB,sBAAiB;UAAjB,kBAAiB;EACjB,uDAA8C;EAA9C,+CAA8C,EAIQ;EAX1D;IASQ,0BAA6C,EAAG;EATxD;IAWQ,0BAA6C,EAAG;;AAExD;EACI,0BAjB+B,EAqBwB;EAL3D;IAGQ,0BAA8C,EAAG;EAHzD;IAKQ,0BAA8C,EAAG;;AAEzD;EACI,0BAvB+B;EAwB/B,aAAY,EAI4C;EAN5D;IAIQ,0BAA+C,EAAG;EAJ1D;IAMQ,0BAA+C,EAAG;;AAE1D;EACI,iBAAgB;EAChB,mBAAkB,EAAI;;AAE1B;EACI,mBAAkB;EAClB,eAAuB,EAAG","file":"main.sass","sourcesContent":["$roboto: 'Roboto', sans-serif;\n\n\n@mixin flex($row, $wrap, $align, $justify) {\n    display: flex;\n    flex-flow: $row $wrap;\n    align-items: $align;\n    justify-content: $justify; }\n\n* {\n    box-sizing: border-box; }\n\nbody {\n    @include flex(column, nowrap, center, flex-start);\n    min-height: 100vh;\n    background-color: #F0F7EE;\n    padding: 4em; }\n\n$header--color: #75B09C;\n\n.header {\n    color: $header--color;\n    transition: color 150ms ease-in-out;\n    &:hover {\n        color: lighten($header--color, 10%);\n        .separator {\n            width: 15em; } } }\n\n.title {\n    color: inherit;\n    text-decoration: none;\n    font-size: 2.2em;\n    font-family: Helvetica Neue;\n    font-weight: 200;\n    cursor: pointer;\n    letter-spacing: 0.03em;\n    text-align: center;\n    display: block; }\n\n.separator {\n    color: inherit;\n    width: 3em;\n    margin: 1em auto 3.5em auto;\n    transition: width 150ms ease-in-out; }\n\n\n.calculator {\n    font-family: $roboto;\n    font-size: 21px;\n    width: 235px;\n    height: 321px;\n    margin: auto;\n    border-radius: 5px;\n    overflow: hidden;\n    box-shadow: 0 15px 40px 0px rgba(20, 20,20, 0.5); }\n\n.display {\n    height: 25%;\n    background-color: rgba(0, 0, 0, 0.33);\n    color: white; }\n\n.display__value {\n    margin: 0;\n    font-size: 40px;\n    width: 100%;\n    height: 75%;\n    font-weight: 100;\n    text-align: right;\n    padding: 10px;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden; }\n\n\n.display__operations {\n    display: block;\n    width: 100%;\n    height: 25%;\n    text-align: left;\n    padding: 0 5px 0px 5px;\n    font-size: 16px;\n    font-weight: 100;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden; }\n\n.numpad {\n    width: 100%;\n    height: 75%;\n    border-collapse: collapse;\n    table-layout: fixed; }\n\n.numpad__row {\n    height: 20%;\n    width: 100%; }\n\n$numpad--color: rgb(213, 213, 213);\n$operand--color: rgb(224, 224, 224);\n$operator--color: rgb(223, 145, 60);\n\n.numpad__cell {\n    cursor: pointer;\n    background-color: $numpad--color;\n    color: black;\n    text-align: center;\n    vertical-align: center;\n    user-select: none;\n    transition: background-color 150ms ease-in-out;\n    &:hover {\n        background-color: darken($numpad--color, 10%); }\n    &:active {\n        background-color: darken($numpad--color, 20%); } }\n\n.operand {\n    background-color: $operand--color;\n    &:hover {\n        background-color: darken($operand--color, 10%); }\n    &:active {\n        background-color: darken($operand--color, 20%); } }\n\n.operator {\n    background-color: $operator--color;\n    color: white;\n    &:hover {\n        background-color: darken($operator--color, 10%); }\n    &:active {\n        background-color: darken($operator--color, 20%); } }\n\n.align-left {\n    text-align: left;\n    padding-left: 23px; }\n\n.error_message {\n    text-align: center;\n    color: rgb(171, 57, 43); }\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 
@@ -9861,7 +9861,7 @@
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('%'),
+												_0: _elm_lang$html$Html$text('﹪'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {
@@ -9970,7 +9970,7 @@
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('x'),
+														_0: _elm_lang$html$Html$text('×'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {ctor: '[]'}
@@ -10060,7 +10060,7 @@
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('-'),
+															_0: _elm_lang$html$Html$text('−'),
 															_1: {ctor: '[]'}
 														}),
 													_1: {ctor: '[]'}
@@ -10371,10 +10371,58 @@
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$map,
-					_user$project$Messages$CalculatorRoute,
-					_user$project$Calculator_View$calculatorView(model.calculatorModel)),
-				_1: {ctor: '[]'}
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('header'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href('https://github.com/l4nk332/Elm-Calculator'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('title'),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Elm-Calculator'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$hr,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('separator'),
+									_1: {ctor: '[]'}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$map,
+								_user$project$Messages$CalculatorRoute,
+								_user$project$Calculator_View$calculatorView(model.calculatorModel)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			});
 	};
 

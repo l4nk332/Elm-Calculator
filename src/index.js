@@ -1,6 +1,5 @@
 'use strict';
 
-require('./index.html');
 require('normalize.css');
 require('./styles/sass/main.sass');
 

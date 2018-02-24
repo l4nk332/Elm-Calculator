@@ -9,3 +9,5 @@ elm-stuff
 repl-temp-*
 
 *.swp
+
+dist
